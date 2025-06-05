@@ -9,5 +9,7 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
 	site: 'https://example.com',
 	integrations: [mdx(), sitemap()],
+	// Output "server" target to netlify
+	output: 'server',
 	adapter: cloudflare(),
 });

@@ -2,8 +2,6 @@ import type { APIRoute } from 'astro';
 import { getCollection, getEntry } from 'astro:content';
 
 
-// export const prerender = false;
-
 export const GET: APIRoute = async ({ params, request }) => {
     const url = new URL(request.url);
     const slug = url.searchParams.get('slug');
