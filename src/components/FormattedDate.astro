@@ -1,12 +1,30 @@
 ---
 interface Props {
-	date: Date;
+	date: string | Date;
 }
 
 const { date } = Astro.props;
+// const parsedDate = typeof date === 'string' ? new Date(date) : date;
+const parsedDate = typeof date === 'string'
+	? new Date(date)
+	: date ?? new Date();
+
+if (!parsedDate || isNaN(parsedDate.getTime())) {
+  throw new Error("Invalid or missing DATE prop");
+}
 ---
 
-<time datetime={date.toISOString()}>
+<time datetime={parsedDate.toISOString()}>
+	{
+		parsedDate.toLocaleDateString('en-us', {
+			year: 'numeric',
+			month: 'short',
+			day: 'numeric',
+		})
+	}
+</time>
+
+<!-- <time datetime={date.toISOString()}>
 	{
 		date.toLocaleDateString('en-us', {
 			year: 'numeric',
@@ -14,4 +32,4 @@ const { date } = Astro.props;
 			day: 'numeric',
 		})
 	}
-</time>
+</time> -->
