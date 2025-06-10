@@ -1,18 +1,26 @@
-import { Clients, db } from 'astro:db';
+import { getCollection } from 'astro:content';
+import { Clients, db, Posts } from 'astro:db';
 
 // https://astro.build/db/seed
 export default async function seed() {
 
 	await db.insert(Clients).values([
-		{ id: 1, name: "GKHG", age: 100, isActive: false },
-		{ id: 2, name: "Gerry", age: 37, isActive: true },
-		{ id: 3, name: "Kabil", age: 10, isActive: true },
-		{ id: 4, name: "Héctor", age: 2, isActive: true },
-		{ id: 5, name: "Greetel", age: 34, isActive: true },
-		{ id: 6, name: "Lesath", age: 3, isActive: false },
+		{ name: "GKHG", age: 100, isActive: false },
+		{ name: "Gerry", age: 37, isActive: true },
+		{ name: "Kabil", age: 10, isActive: true },
+		{ name: "Héctor", age: 2, isActive: true },
+		{ name: "Greetel", age: 34, isActive: true },
+		{ name: "Lesath", age: 3, isActive: false },
 	]);
 
-	// await Promise.all([
-	// 	db.insert(Clients).values({ id: 1, name: "GKHG", age: 100, isActive: false }),
-	// ]);
+	const posts = await getCollection('blog');
+
+	await db.insert(Posts).values(
+		posts.map((p) => ({
+			id: p.id,
+			title: p.data.title,
+			likes: Math.round(Math.random() * 100),
+		}))
+	);
+
 }
