@@ -30,14 +30,19 @@
     const likeClicks = ref(0);
     const isLoading = ref(true);
 
-    watch( likeCount, debounce(() =>{
-        fetch(`/api/posts/likes/${ props.postId }`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ likes: likeClicks.value })
+    watch( likeCount, debounce( async() =>{
+        // fetch(`/api/posts/likes/${ props.postId }`, {
+        //     method: 'PUT',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({ likes: likeClicks.value })
+        // });
+        await actions.updatePostLikes({
+            postId: props.postId,
+            increment: likeClicks.value
         });
+
         likeClicks.value = 0;
     }, 500));
 
@@ -45,17 +50,15 @@
         likeCount.value++;
         likeClicks.value++;
 
-        const { data, error } = await actions.getGreeting({
-            name: 'gErRyVoY',
-            age: 37,
-            isActive: true,
-        });
+        // const { data, error } = await actions.getGreeting({
+        //     name: 'gErRyVoY',
+        //     age: 37,
+        //     isActive: true,
+        // });
 
-        if (error) {
-            return alert('Algo salió mal! :(');
-        }
-
-        console.log({ data });
+        // if (error) {
+        //     return alert('Algo salió mal! :(');
+        // }
 
         confetti({
             particleCount: 100,
@@ -68,13 +71,18 @@
     }
 
     const getCurrentLikes = async() => {
-        const resp = await fetch(`/api/posts/likes/${ props.postId }`);
-        if ( !resp.ok ) return;
+        const { data, error } = await actions.getPostLikes( props.postId );
 
-        const data = await resp.json();
+        if ( error ) {
+            return alert(error);
+        }
+
+        // const resp = await fetch(`/api/posts/likes/${ props.postId }`);
+        // if ( !resp.ok ) return;
+        // const data = await resp.json();
+
         likeCount.value = data.likes;
         isLoading.value = false;
-        console.log(data);
     }
 
     getCurrentLikes();
