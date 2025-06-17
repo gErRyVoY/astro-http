@@ -16,7 +16,7 @@ export const GET: APIRoute = async () => {
     });
 };
 
-export const POST: APIRoute = async ({ params, request }) => {
+export const POST: APIRoute = async ({ request }) => {
     try {
         const { id, ...body } = await request.json();
         const client = await prisma.client.create({

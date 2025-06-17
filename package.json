@@ -5,16 +5,14 @@
   "scripts": {
     "dev": "astro dev",
     "old:start": "astro dev",
-    "start": "node ./dist/server/entry.js",
-    "build": "npm run prisma:generate && astro check && astro build",
+    "start": "node ./dist/server/entry.mjs",
+    "build": "npm run prisma:generate && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "prisma:generate": "prisma generate"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/cloudflare": "^12.5.3",
-    "@astrojs/db": "^0.15.0",
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/node": "^9.2.2",
     "@astrojs/rss": "^4.0.12",
