@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getEntry } from 'astro:content';
 
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const GET: APIRoute = async ({ params }) => {
     const { slug } = params;
     const post = await getEntry('blog', slug as any);
 
@@ -23,7 +23,7 @@ export const GET: APIRoute = async ({ params, request }) => {
     });
 };
 
-export const POST: APIRoute = async ({ params, request }) => {
+export const POST: APIRoute = async ({ request }) => {
     const body = await request.json();
 
     return new Response(
@@ -40,7 +40,7 @@ export const POST: APIRoute = async ({ params, request }) => {
     );
 };
 
-export const PUT: APIRoute = async ({ params, request }) => {
+export const PUT: APIRoute = async ({ request }) => {
     const body = await request.json();
 
     return new Response(
@@ -57,7 +57,7 @@ export const PUT: APIRoute = async ({ params, request }) => {
     );
 };
 
-export const PATCH: APIRoute = async ({ params, request }) => {
+export const PATCH: APIRoute = async ({ request }) => {
     const body = await request.json();
 
     return new Response(
@@ -74,7 +74,7 @@ export const PATCH: APIRoute = async ({ params, request }) => {
     );
 };
 
-export const DELETE: APIRoute = async ({ params, request }) => {
+export const DELETE: APIRoute = async ({ params }) => {
     const { slug }  = params;
 
     return new Response(

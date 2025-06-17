@@ -17,6 +17,8 @@ pnpm-debug.log*
 .env
 .env.production
 
+get-person.json.ts
+
 # macOS-specific files
 .DS_Store
 

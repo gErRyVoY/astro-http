@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { db, Clients, eq } from 'astro:db';
+// import { db, Clients, eq } from 'astro:db';
 import prisma from '@db';
 
 
@@ -17,7 +17,7 @@ const findClientById = async ( clientId: string ) => {
     }
 };
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const GET: APIRoute = async ({ params }) => {
     const { clientId = '' } = params;
 
     try {
@@ -101,7 +101,9 @@ export const DELETE: APIRoute = async ({ params, request }) => {
     }
 
     try {
+        // const { id, ...body } = await request.json();
         const { id, ...body } = await request.json();
+        console.log(body);
 
         const deletedClient = await prisma.client.delete({
             where: {

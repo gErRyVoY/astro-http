@@ -1,11 +1,11 @@
 import type { APIRoute } from 'astro';
-import { Clients, db } from 'astro:db';
+// import { Clients, db } from 'astro:db';
 import { v4 as UUID } from 'uuid';
 import prisma from '@db';
 
 
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const GET: APIRoute = async () => {
     const clients = await prisma.client.findMany();
     
     return new Response(JSON.stringify(clients), {

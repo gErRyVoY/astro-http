@@ -4,11 +4,15 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "old:start": "astro dev",
+    "start": "node ./dist/server/entry.js",
+    "build": "npm run prisma:generate && astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prisma:generate": "prisma generate"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
     "@astrojs/cloudflare": "^12.5.3",
     "@astrojs/db": "^0.15.0",
     "@astrojs/mdx": "^4.3.0",
@@ -21,6 +25,7 @@
     "canvas-confetti": "^1.9.3",
     "lodash.debounce": "^4.0.8",
     "sharp": "^0.34.2",
+    "typescript": "^5.8.3",
     "uuid": "^11.1.0",
     "vue": "^3.5.16"
   },

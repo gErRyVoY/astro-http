@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getCollection, getEntry } from 'astro:content';
 
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const GET: APIRoute = async ({ request }) => {
     const url = new URL(request.url);
     const slug = url.searchParams.get('slug');
     

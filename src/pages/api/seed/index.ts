@@ -17,7 +17,7 @@ const clients = [
     { id: UUID(), name: 'Ava Anderson', age: 25, is_active: false },
 ];
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const GET: APIRoute = async () => {
     // Borrar usuarios
     await prisma.client.deleteMany();
     // Limpiar los posts
